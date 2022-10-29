@@ -9,7 +9,7 @@ func sqrt(userInput float64) string { // if statement uses {}
 	if userInput < 0 {
 		return sqrt(-userInput) + "i"
 	}
-	return fmt.Sprint(math.Sqrt(userInput))
+	return fmt.Sprint(math.Sqrt(userInput)) // uses the defualt operands and returns the resulting string
 }
 
 func main() {
