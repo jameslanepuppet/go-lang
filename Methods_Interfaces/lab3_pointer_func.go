@@ -8,7 +8,7 @@ import (
 type UserID struct {
 	X, Y float64
 }
-
+// the Abs and Scale methods rewritten as functions
 func Abs(geoLoc UserID) float64 {
 	return math.Sqrt(geoLoc.X*geoLoc.X + geoLoc.Y*geoLoc.Y)
 }
