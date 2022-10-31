@@ -8,7 +8,7 @@ import (
 
 	"fmt"
 )
-
+// describes existing instances that are running in EC2. 
 func GetRunningInstances(client *ec2.EC2) (*ec2.DescribeInstancesOutput, error) {
 	result, err := client.DescribeInstances(&ec2.DescribeInstancesInput{
 		Filters: []*ec2.Filter{
@@ -30,19 +30,15 @@ func GetRunningInstances(client *ec2.EC2) (*ec2.DescribeInstancesOutput, error) 
 
 
 func main() {
-	sess, err := session.NewSessionWithOptions(session.Options{
-		Profile: "default",
-		Config: aws.Config{
-			Region: aws.String("us-west-2"),
-		},
-	})
+	// Create a Session with a custom region
+	session, err := session.NewSession(&aws.Config{Region: aws.String("us-west-2"),})
 
 	if err != nil {
 		fmt.Printf("Failed to initialize new session: %v", err)
 		return
 	}
 
-	ec2Client := ec2.New(sess)
+	ec2Client := ec2.New(session)
 
 	runningInstances, err := GetRunningInstances(ec2Client)
 	if err != nil {
